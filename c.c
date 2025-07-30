@@ -16,10 +16,19 @@
     : "%rax", "%rdi", "%rsi", "%rdx" \
 )
 ??=define P1(...) \
-    int i = 0 \
-    ;switch(i) \
-    case 0: for(;i <= (long)(&__VA_ARGS__??(0xD??) - &__VA_ARGS__??(0x0??));)??<P0(__VA_ARGS__??(i++??));??>
-
+    long l = (long)(&__VA_ARGS__??(0xE??) - &__VA_ARGS__??(0x0??)); \
+    unsigned char* p = (unsigned char*)&__VA_ARGS__??(0x0??); \
+    switch(l % 8) ??< \
+        case 0: do ??< P0(*p++); \
+        case 7: P0(*p++); \
+        case 6: P0(*p++); \
+        case 5: P0(*p++); \
+        case 4: P0(*p++); \
+        case 3: P0(*p++); \
+        case 2: P0(*p++); \
+        case 1: P0(*p++); \
+        ??> while((l -= 8) > 0);??>
+            
 struct ??<
 unsigned short : 0;
 unsigned char h??(??);
