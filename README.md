@@ -1,2 +1,2 @@
 # chw
-The cursed Hello World 
+The cursed Hello World program
